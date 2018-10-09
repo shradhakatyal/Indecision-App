@@ -3,13 +3,16 @@ import Header from './Header';
 import Action from './Action';
 import AddOption from './AddOption';
 import Options from './Options';
+import OptionModal from './OptionModal'; 
 
 class IndecisionApp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            options: props.options
+            options: [],
+            selectedOption: undefined
         };
+        this.handleClearSelectedOption = this.handleClearSelectedOption.bind(this);
         this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
         this.handlePick = this.handlePick.bind(this);
         this.handleAddOption = this.handleAddOption.bind(this);
@@ -41,6 +44,10 @@ class IndecisionApp extends React.Component {
         console.log('componentWIllUnmount');
     }
 
+    handleClearSelectedOption() {
+        this.setState(() => ({ selectedOption: undefined }));
+    }
+
     handleDeleteOptions() {
         this.setState(() => ({ options:[] }));
     }
@@ -52,9 +59,16 @@ class IndecisionApp extends React.Component {
     }
 
     handlePick() {
-        const length = this.state.options.length;
-        const index = Math.floor((Math.random()*length));
-        alert(this.state.options[index]);
+        const index = Math.floor(Math.random()*this.state.options.length);
+        const option = this.state.options[index];
+        console.log(option)
+        this.setState(() => {
+            return {
+                selectedOption: option
+            }
+        });
+        console.log(this.state);
+        // alert(this.state.options[index]);
     }
 
     handleAddOption(option) {
@@ -83,6 +97,10 @@ class IndecisionApp extends React.Component {
                   onDeleteOption={this.handleDeleteOption}   
                 />
                 <AddOption onAddOption={this.handleAddOption} />
+                <OptionModal 
+                selectedOption = {this.state.selectedOption}
+                onHandleClearSelectedOption = {this.handleClearSelectedOption}
+                />
             </div>
         );
     }
