@@ -25,8 +25,7 @@
     "style-loader": "^0.23.1",
     "validator": "^10.7.0",
     "webpack": "3.1.0",
-    "webpack-dev-server": "2.5.1",
-    "webpack-devserver": "0.0.6"
+    "webpack-dev-server": "^3.1.14"
   },
   "devDependencies": {
     "react-modal": "^2.2.2"
